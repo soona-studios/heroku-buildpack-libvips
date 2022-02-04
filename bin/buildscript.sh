@@ -90,7 +90,7 @@ configure_and_compile() {
     && ./configure --prefix $VIPS_PATH --enable-shared --disable-static \
       --disable-dependency-tracking --disable-debug --disable-introspection \
       --without-fftw --without-pangoft2 --without-ppm \
-      --without-analyze --without-radiance > /dev/null 2>& 1 \
+      --without-radiance > /dev/null 2>& 1 \
     && make -s > /dev/null 2>& 1
 }
 
