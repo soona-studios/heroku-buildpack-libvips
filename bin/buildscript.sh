@@ -91,6 +91,8 @@ configure_and_compile() {
       --disable-dependency-tracking --disable-debug --disable-introspection \
       --without-fftw --without-pangoft2 --without-ppm \
       --without-analyze --without-radiance > /dev/null 2>& 1 \
+      --with-giflib-includes=/app/.apt/usr/include \
+      --with-giflib-libraries=/app/.apt/usr/lib/x86_64-linux-gnu \
     && make -s > /dev/null 2>& 1
 }
 
