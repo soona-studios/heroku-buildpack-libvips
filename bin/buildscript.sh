@@ -46,7 +46,7 @@ detect_libvips_version() {
 
 detect_latest_version() {
   curl -s https://api.github.com/repos/libvips/libvips/releases/latest \
-    | grep "browser_download_url.*tar.xz" \
+    | grep "browser_download_url.*tar.gz" \
     | head -1 \
     | cut -d : -f 2,3 \
     | tr -d \" \
@@ -74,15 +74,15 @@ build_libvips() {
 download_libvips() {
   rm -Rf $CACHE_DIR/*
 
-  local download_path="$TMP_DIR/libvips.tar.xz"
+  local download_path="$TMP_DIR/libvips.tar.gz"
 
   echo "Downloading libvips ${LIBVIPS_VERSION} source archive" | indent
-  curl -sL "https://github.com/libvips/libvips/releases/download/v${LIBVIPS_VERSION}/vips-${LIBVIPS_VERSION}.tar.xz" -o $download_path
+  curl -sL "https://github.com/libvips/libvips/releases/download/v${LIBVIPS_VERSION}/vips-${LIBVIPS_VERSION}.tar.gz" -o $download_path
 }
 
 unpack_source_archive() {
   echo "Unpacking libvips source archive" | indent \
-    && tar xf "$TMP_DIR/libvips.tar.xz" -C $TMP_DIR --strip 1
+    && tar xf "$TMP_DIR/libvips.tar.gz" -C $TMP_DIR --strip 1
 }
 
 configure_and_compile() {
@@ -90,10 +90,10 @@ configure_and_compile() {
     && ./configure --prefix $VIPS_PATH --enable-shared --disable-static \
       --disable-dependency-tracking --disable-debug --disable-introspection \
       --without-fftw --without-pangoft2 --without-ppm \
-      --without-analyze --without-radiance \
+      --without-analyze --without-radiance > /dev/null 2>& 1 \
       --with-giflib-includes=/app/.apt/usr/include \
       --with-giflib-libraries=/app/.apt/usr/lib/x86_64-linux-gnu \
-    && make -s
+    && make -s > /dev/null 2>& 1
 }
 
 cache_build() {
