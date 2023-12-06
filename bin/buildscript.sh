@@ -93,7 +93,7 @@ configure_and_compile() {
       --without-analyze --without-radiance > /dev/null 2>& 1 \
       --with-giflib-includes=/app/.apt/usr/include \
       --with-giflib-libraries=/app/.apt/usr/lib/x86_64-linux-gnu \
-    && make -s > /dev/null 2>& 1
+    && make -s
 }
 
 cache_build() {
